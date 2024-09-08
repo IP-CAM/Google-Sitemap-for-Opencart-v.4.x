@@ -1,7 +1,7 @@
 {
   "name": "oc4_google_sitemap",
   "version": "1.0.0",
-  "description": "OpenCart 4 Google sitemap extension",
+  "description": "Playful Sparkle - Google Sitemap for OpenCart v4",
   "main": "index.js",
   "scripts": {
     "compress": "node compress.js"

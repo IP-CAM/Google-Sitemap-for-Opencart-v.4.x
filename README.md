@@ -1,2 +1,2 @@
 # oc4_google_sitemap
-OpenCart 4 Google sitemap extension
+Playful Sparkle - Google Sitemap for OpenCart v4
