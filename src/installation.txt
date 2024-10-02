@@ -1,4 +1,6 @@
-Playful Sparkle - Google Sitemap for OpenCart v4
+Playful Sparkle - Google Sitemap
+
+The Playful Sparkle - Google Sitemap is an OpenCart 4 feed extension that simplifies the generation of a comprehensive sitemap for your online store. This extension automatically creates a sitemap that includes: Products, Categories, Manufacturers, and Information Pages. With just a few clicks, you can optimize your store for better search engine performance and improved user experience, making it easier for customers to find what they need.
 
 For more information, visit the extension GitHub page at https://github.com/playfulsparkle/oc4_google_sitemap.git.
 
@@ -7,7 +9,30 @@ Demo backend - https://demo.playfulsparkle.com/opencart4/admin/
 
 Key Features
 
+* Automatically generates a detailed XML sitemap for improved search engine indexing.
+* Effortlessly includes entries for Products, Categories, Manufacturers, and Information pages.
+* Automatically updates the sitemap with any changes to your store’s content.
+* User-friendly setup and configuration through the OpenCart admin interface.
+* Fully compatible with OpenCart versions 4.x.
+
 Installation Guide
+
+1. Download the "Playful Sparkle - Google Sitemap" Extension Package.
+2. Download the latest version of the Playful Sparkle - Google Sitemap extension from the link provided on this page.
+3. Upload the Extension Files:
+    1. Log in to your OpenCart admin panel.
+    2. Navigate to Extensions > Installer.
+    3. Click the "Upload" button and upload the file ps_google_sitemap.ocmod.zip.
+4. Install the Extension:
+    1. After uploading, click the green "Install" button.
+    2. Go to Extensions and select Feeds from the dropdown menu.
+    3. Locate the "Playful Sparkle - Google Sitemap" extension in the list.
+    4. Click the green "Install" button to activate it.
+5. Configure the Extension:
+    1. Stay on the Extensions page with Feeds selected.
+    2. Click the "Edit" button next to the installed Playful Sparkle - Google Sitemap extension.
+    3. Configure your sitemap settings as needed (e.g., frequency, priority).
+    4. Save your configuration.
 
 Support & Feedback
 

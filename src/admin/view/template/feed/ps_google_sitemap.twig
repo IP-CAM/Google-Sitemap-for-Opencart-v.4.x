@@ -1,0 +1,115 @@
+{{ header }}
+{{ column_left }}
+<div id="content">
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="float-end">
+				<button type="submit" form="form-feed" data-bs-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa-solid fa-save"></i></button>
+				<a href="{{ back }}" data-bs-toggle="tooltip" title="{{ button_back }}" class="btn btn-light"><i class="fa-solid fa-reply"></i></a>
+			</div>
+			<h1>{{ heading_title }}</h1>
+			<ol class="breadcrumb">
+				{% for breadcrumb in breadcrumbs %}
+				<li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+				{% endfor %}
+			</ol>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="card">
+			<div class="card-header"><i class="fa-solid fa-list"></i> {{ text_edit }}</div>
+			<div class="card-body">
+
+				<form id="form-feed" action="{{ action }}" method="post" data-oc-toggle="ajax">
+
+					<div class="row mb-3">
+						<label class="col-sm-2 col-form-label">{{ entry_status }}</label>
+						<div class="col-sm-10">
+							<select name="feed_ps_google_sitemap_status" id="input-status" class="form-control">
+								{% if feed_ps_google_sitemap_status %}
+								<option value="1" selected="selected">{{ text_enabled }}</option>
+								<option value="0">{{ text_disabled }}</option>
+								{% else %}
+								<option value="1">{{ text_enabled }}</option>
+								<option value="0" selected="selected">{{ text_disabled }}</option>
+								{% endif %}
+							</select>
+						</div>
+					</div>
+
+					<div class="row mb-3">
+						<label class="col-sm-2 col-form-label">{{ entry_product }}</label>
+						<div class="col-sm-10">
+							<div class="form-check form-switch form-switch-lg">
+								<input type="hidden" name="feed_ps_google_sitemap_product" value="0" />
+								<input type="checkbox" name="feed_ps_google_sitemap_product" value="1" class="form-check-input" {% if feed_ps_google_sitemap_product %} checked{% endif %} />
+							</div>
+						</div>
+					</div>
+
+					<div class="row mb-3">
+						<label class="col-sm-2 col-form-label">{{ entry_category }}</label>
+						<div class="col-sm-10">
+							<div class="form-check form-switch form-switch-lg">
+								<input type="hidden" name="feed_ps_google_sitemap_category" value="0" />
+								<input type="checkbox" name="feed_ps_google_sitemap_category" value="1" class="form-check-input" {% if feed_ps_google_sitemap_category %} checked{% endif %} />
+							</div>
+						</div>
+					</div>
+
+					<div class="row mb-3">
+						<label class="col-sm-2 col-form-label">{{ entry_manufacturer }}</label>
+						<div class="col-sm-10">
+							<div class="form-check form-switch form-switch-lg">
+								<input type="hidden" name="feed_ps_google_sitemap_manufacturer" value="0" />
+								<input type="checkbox" name="feed_ps_google_sitemap_manufacturer" value="1" class="form-check-input" {% if feed_ps_google_sitemap_manufacturer %} checked{% endif %} />
+							</div>
+						</div>
+					</div>
+
+					<div class="row mb-3">
+						<label class="col-sm-2 col-form-label">{{ entry_information }}</label>
+						<div class="col-sm-10">
+							<div class="form-check form-switch form-switch-lg">
+								<input type="hidden" name="feed_ps_google_sitemap_information" value="0" />
+								<input type="checkbox" name="feed_ps_google_sitemap_information" value="1" class="form-check-input" {% if feed_ps_google_sitemap_information %} checked{% endif %} />
+							</div>
+						</div>
+					</div>
+
+					<div class="row mb-3">
+						<label class="col-sm-2 col-form-label">{{ entry_data_feed_url }}</label>
+						<div class="col-sm-10">
+							<div class="input-group">
+								<input type="text" value="{{ data_feed_url }}" id="input-data-feed-url" class="form-control" readonly />
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-success btn-copy" data-toggle="tooltip" data-input-id="input-data-feed-url" title="{{ help_copy }}"><i class="fa fa-copy"></i></button>
+								</span>
+							</div>
+						</div>
+					</div>
+
+				</form>
+
+			</div>
+		</div>
+	</div>
+	<script>
+		window.addEventListener("load", (event) => {
+			var btns = document.querySelectorAll('.btn-copy');
+
+			btns.forEach(btn => {
+				btn.addEventListener("click", function () {
+					var copyText = document.querySelector("#" + this.dataset.inputId);
+
+					if (copyText) {
+						copyText.select();
+						copyText.setSelectionRange(0, 99999);
+						document.execCommand("copy");
+					}
+				});
+			});
+		});
+	</script>
+</div>
+{{ footer }}
