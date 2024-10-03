@@ -1,10 +1,21 @@
 <?php
 namespace Opencart\Catalog\Controller\Extension\PSGoogleSitemap\Feed;
-
+/**
+ * Class PSGoogleSitemap
+ *
+ * @package Opencart\Catalog\Controller\Extension\PSGoogleSitemap\Feed
+ */
 class PSGoogleSitemap extends \Opencart\System\Engine\Controller
 {
+    /**
+     * Instance of XMLWriter
+     * @var \XMLWriter
+     */
     private $xml;
 
+    /**
+     * @return void
+     */
     public function index(): void
     {
         if (!$this->config->get('feed_ps_google_sitemap_status')) {
@@ -14,12 +25,24 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
         $this->load->model('localisation/language');
 
         $languages = $this->model_localisation_language->getLanguages();
+        $firstLanguage = current($languages);
+        $defaultLanguage = $firstLanguage['code'];
+
+        if (isset($this->request->get['language'])) {
+            $language = $this->request->get['language'];
+
+            if (false === in_array($language, array_column($languages, 'code'))) {
+                $language = $defaultLanguage;
+            }
+        } else {
+            $language = $defaultLanguage;
+        }
+
 
         $this->xml = new \XMLWriter();
         $this->xml->openMemory();
         $this->xml->startDocument('1.0', 'UTF-8');
 
-        // Start <urlset> element
         $this->xml->startElement('urlset');
         $this->xml->writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
         $this->xml->writeAttribute('xmlns:image', 'http://www.google.com/schemas/sitemap-image/1.1');
@@ -34,7 +57,7 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
 
             foreach ($products as $product) {
                 $this->xml->startElement('url');
-                $this->xml->writeElement('loc', $this->url->link('product/product', 'language=' . $this->config->get('config_language') . '&product_id=' . $product['product_id']));
+                $this->xml->writeElement('loc', $this->url->link('product/product', 'language=' . $language . '&product_id=' . $product['product_id']));
                 $this->xml->writeElement('changefreq', 'weekly');
                 $this->xml->writeElement('lastmod', date('Y-m-d\TH:i:sP', strtotime($product['date_modified'])));
                 $this->xml->writeElement('priority', '1.0');
@@ -58,7 +81,7 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
         if ($this->config->get('feed_ps_google_sitemap_category')) {
             $this->load->model('catalog/category');
 
-            $this->getCategories(0);
+            $this->getCategories($language, 0);
         }
         #endregion
 
@@ -70,7 +93,7 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
 
             foreach ($manufacturers as $manufacturer) {
                 $this->xml->startElement('url');
-                $this->xml->writeElement('loc', $this->url->link('product/manufacturer', 'language=' . $this->config->get('config_language') . '&manufacturer_id=' . $manufacturer['manufacturer_id']));
+                $this->xml->writeElement('loc', $this->url->link('product/manufacturer', 'language=' . $language . '&manufacturer_id=' . $manufacturer['manufacturer_id']));
                 $this->xml->writeElement('changefreq', 'weekly');
                 $this->xml->writeElement('priority', '0.7');
                 $this->xml->endElement();
@@ -86,7 +109,7 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
 
             foreach ($informations as $information) {
                 $this->xml->startElement('url');
-                $this->xml->writeElement('loc', $this->url->link('information/information', 'language=' . $this->config->get('config_language') . '&information_id=' . $information['information_id']));
+                $this->xml->writeElement('loc', $this->url->link('information/information', 'language=' . $language . '&information_id=' . $information['information_id']));
                 $this->xml->writeElement('changefreq', 'weekly');
                 $this->xml->writeElement('priority', '0.5');
                 $this->xml->endElement();
@@ -94,27 +117,31 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
         }
         #endregion
 
-        // End <urlset> element
         $this->xml->endElement();
         $this->xml->endDocument();
 
         $this->response->addHeader('Content-Type: application/xml');
         $this->response->setOutput($this->xml->outputMemory());
+
+        unset($this->xml);
     }
 
-    protected function getCategories($parent_id): void
+    /**
+     * @return void
+     */
+    protected function getCategories($language, $parent_id): void
     {
         $categories = $this->model_catalog_category->getCategories($parent_id);
 
         foreach ($categories as $category) {
             $this->xml->startElement('url');
-            $this->xml->writeElement('loc', $this->url->link('product/category', 'language=' . $this->config->get('config_language') . '&path=' . $category['category_id']));
+            $this->xml->writeElement('loc', $this->url->link('product/category', 'language=' . $language . '&path=' . $category['category_id']));
             $this->xml->writeElement('changefreq', 'weekly');
             $this->xml->writeElement('priority', '0.7');
             $this->xml->endElement();
 
             if ($category['category_id'] > 0) {
-                $this->getCategories($category['category_id']);
+                $this->getCategories($language, $category['category_id']);
             }
         }
     }

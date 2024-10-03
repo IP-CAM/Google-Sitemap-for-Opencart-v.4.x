@@ -1,8 +1,15 @@
 <?php
 namespace Opencart\Admin\Controller\Extension\PSGoogleSitemap\Feed;
-
+/**
+ * Class PSGoogleSitemap
+ *
+ * @package Opencart\Admin\Controller\Extension\PSGoogleSitemap\Feed
+ */
 class PSGoogleSitemap extends \Opencart\System\Engine\Controller
 {
+    /**
+     * @return void
+     */
     public function index(): void
     {
         $this->load->language('extension/ps_google_sitemap/feed/ps_google_sitemap');
@@ -38,7 +45,17 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
         $data['feed_ps_google_sitemap_manufacturer'] = $this->config->get('feed_ps_google_sitemap_manufacturer');
         $data['feed_ps_google_sitemap_information'] = $this->config->get('feed_ps_google_sitemap_information');
 
-        $data['data_feed_url'] = HTTP_CATALOG . 'index.php?route=extension/ps_google_sitemap/feed/ps_google_sitemap';
+        $this->load->model('localisation/language');
+
+        $languages = $this->model_localisation_language->getLanguages();
+
+        $data['languages'] = $languages;
+
+        $data['data_feed_urls'] = [];
+
+        foreach ($languages as $language) {
+            $data['data_feed_urls'][$language['language_id']] = HTTP_CATALOG . 'index.php?route=extension/ps_google_sitemap/feed/ps_google_sitemap&language=' . $language['code'];
+        }
 
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
@@ -47,6 +64,9 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
         $this->response->setOutput($this->load->view('extension/ps_google_sitemap/feed/ps_google_sitemap', $data));
     }
 
+    /**
+     * @return void
+     */
     public function save(): void
     {
         $this->load->language('extension/ps_google_sitemap/feed/ps_google_sitemap');
@@ -69,11 +89,17 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
         $this->response->setOutput(json_encode($json));
     }
 
+    /**
+     * @return void
+     */
     public function install(): void
     {
 
     }
 
+    /**
+     * @return void
+     */
     public function uninstall(): void
     {
 
