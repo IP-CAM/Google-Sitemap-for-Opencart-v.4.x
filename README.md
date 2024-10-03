@@ -1,26 +1,23 @@
 # Playful Sparkle - Google Sitemap
 
-A **Google Sitemap** is an XML file that lists the important pages of your website, helping search engines like Google discover and index them efficiently. By providing a clear structure of your site’s content, a sitemap enhances your website's visibility and ensures that all important pages are crawled by search engines.
+The **Playful Sparkle - Google Sitemap** extension for OpenCart 4 is a user-friendly tool designed to enhance your online store's visibility in search engines. This extension simplifies the creation of XML sitemaps, which are crucial for helping search engines crawl and index your website effectively.
 
-The **Playful Sparkle - Google Sitemap** is an OpenCart 4 feed extension that simplifies the generation of a comprehensive sitemap for your online store. This extension automatically creates a sitemap that includes:
+The extension streamlines the process of submitting relevant information to Google. It allows users to create focused sitemaps that highlight important pages while optimizing their site for multilingual audiences. With the extension, sitemap updates are automated, saving users time and ensuring that their information remains accurate and current.
 
-- **Products**: Ensuring all your merchandise is indexed.
-- **Categories**: Helping search engines understand your product hierarchy.
-- **Manufacturers**: Enhancing the visibility of brands you offer.
-- **Information Pages**: Ensuring that all content is easily accessible.
+## About Google Search Console
 
-With just a few clicks, you can optimize your store for better search engine performance and improved user experience, making it easier for customers to find what they need.
+**Google Search Console** is a free tool that helps webmasters monitor their site’s performance in Google search results. It provides insights into clicks, impressions, and keyword performance, allowing you to track how well your site is performing in search results. Additionally, it checks indexing status and identifies any crawl errors that may hinder your site’s visibility. Google Search Console also facilitates the submission of XML sitemaps, which can enhance your site’s indexing by search engines.
 
 ---
 
 ## Features
 
 ### Playful Sparkle - Google Sitemap
-- **Comprehensive XML Sitemap Generation**: Automatically generates a detailed XML sitemap for your OpenCart store, ensuring all critical pages are included for optimal search engine indexing.
-- **Dynamic Content Inclusion**: Effortlessly includes entries for Products, Categories, Manufacturers, and Information pages, enhancing your site’s structure for search engines.
-- **Automatic Updates**: The sitemap automatically updates with any changes to your store’s content, ensuring that search engines always have the most current information.
-- **User-Friendly Configuration**: Experience a straightforward setup and configuration process through the OpenCart interface, designed for maximum efficiency.
-- **Full Compatibility**: Fully compatible with OpenCart v4.x, ensuring seamless integration with your existing setup.
+- **Customizable Sitemap Generation**: Select specific content types to include, such as products, categories, manufacturers, and informational pages.
+- **Multilingual Support**: Generate language-specific XML sitemaps, ensuring URLs, titles, and descriptions are displayed in the chosen language for submission to Google Search Console.
+- **Automatic Updates**: Automatically updates the sitemap with any changes to your store’s content.
+- **User-Friendly Setup**: Enjoy a seamless setup process through the OpenCart interface, designed for ease of use and efficiency.
+- **Full Compatibility**: Fully compatible with OpenCart v4.x, ensuring smooth integration with your existing setup.
 
 ---
 
