@@ -7,6 +7,7 @@ $_['text_extension']      = 'Extensions';
 $_['text_success']        = 'Success: You have modified Google Sitemap feed!';
 $_['text_edit']           = 'Edit Google Sitemap';
 $_['text_clear']          = 'Clear Database';
+$_['text_categories']     = 'Categories';
 
 // Entry
 $_['entry_status']        = 'Status';

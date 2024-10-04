@@ -7,6 +7,7 @@ $_['text_extension']      = 'Rozšíření';
 $_['text_success']        = 'Úspěch: Upravili jste Google Sitemap feed!';
 $_['text_edit']           = 'Upravit Google Sitemap';
 $_['text_clear']          = 'Vymazat databázi';
+$_['text_categories']     = 'Kategorie';
 
 // Entry
 $_['entry_status']        = 'Stav';

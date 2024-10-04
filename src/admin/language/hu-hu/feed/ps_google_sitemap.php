@@ -7,6 +7,7 @@ $_['text_extension']      = 'Bővítmények';
 $_['text_success']        = 'Siker: A Google Oldaltérkép feedet módosította!';
 $_['text_edit']           = 'Google Oldaltérkép szerkesztése';
 $_['text_clear']          = 'Adatbázis törlése';
+$_['text_categories']     = 'Kategóriák';
 
 // Entry
 $_['entry_status']        = 'Állapot';

@@ -7,6 +7,7 @@ $_['text_extension']      = 'Erweiterungen';
 $_['text_success']        = 'Erfolg: Sie haben den Google Sitemap-Feed geändert!';
 $_['text_edit']           = 'Google Sitemap bearbeiten';
 $_['text_clear']          = 'Datenbank leeren';
+$_['text_categories']     = 'Kategorien';
 
 // Entry
 $_['entry_status']        = 'Status';
