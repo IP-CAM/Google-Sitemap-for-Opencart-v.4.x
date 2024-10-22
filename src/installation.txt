@@ -6,8 +6,8 @@ The extension streamlines the process of submitting relevant information to Goog
 
 For more information, visit the extension GitHub page at https://github.com/playfulsparkle/oc4_google_sitemap.git.
 
-Demo frontend - https://demo.playfulsparkle.com/opencart4/
-Demo backend - https://demo.playfulsparkle.com/opencart4/admin/
+Demo frontend - https://opencart4.playfulsparkle.com/
+Demo backend - https://opencart4.playfulsparkle.com/admin/
 
 Key Features
 
