@@ -3,17 +3,32 @@ namespace Opencart\Catalog\Controller\Extension\PSGoogleSitemap\Feed;
 /**
  * Class PSGoogleSitemap
  *
+ *
+ * This class generates an XML sitemap for Google, including products, categories,
+ * manufacturers, and information pages. The sitemap is created based on the configuration
+ * settings and the active languages in the OpenCart store.
+ *
  * @package Opencart\Catalog\Controller\Extension\PSGoogleSitemap\Feed
  */
 class PSGoogleSitemap extends \Opencart\System\Engine\Controller
 {
     /**
      * Instance of XMLWriter
+     *
+     * This property holds the XMLWriter instance used for creating the sitemap XML structure.
+     *
      * @var \XMLWriter
      */
     private $xml;
 
     /**
+     * Generates and outputs the Google Sitemap XML.
+     *
+     * This method checks if the sitemap feature is enabled in the configuration.
+     * If it is, it initializes the XMLWriter, sets the XML header, and populates
+     * the sitemap with URLs for products, categories, manufacturers, and
+     * information pages based on the active languages.
+     *
      * @return void
      */
     public function index(): void
@@ -126,6 +141,16 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
     }
 
     /**
+     * Recursively retrieves and adds categories to the sitemap.
+     *
+     * This method takes a language code and a parent category ID to fetch categories
+     * from the database. It creates the necessary XML elements for each category,
+     * including its last modification date. The method calls itself recursively
+     * to fetch subcategories.
+     *
+     * @param string $language The language code for the URLs.
+     * @param int $parent_id The ID of the parent category (default is 0 for top-level categories).
+     *
      * @return void
      */
     protected function getCategories($language, $parent_id): void

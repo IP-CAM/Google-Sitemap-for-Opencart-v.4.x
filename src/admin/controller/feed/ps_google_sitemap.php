@@ -8,13 +8,19 @@ namespace Opencart\Admin\Controller\Extension\PSGoogleSitemap\Feed;
 class PSGoogleSitemap extends \Opencart\System\Engine\Controller
 {
     /**
+     * Displays the Google Sitemap settings page.
+     *
+     * This method loads the necessary language file, sets the title of the page,
+     * and prepares the data for the view. It also generates the breadcrumbs for
+     * navigation and retrieves configuration settings for the sitemap.
+     *
      * @return void
      */
     public function index(): void
     {
         $this->load->language('extension/ps_google_sitemap/feed/ps_google_sitemap');
 
-        $this->document->setTitle(strip_tags($this->language->get('heading_title')));
+        $this->document->setTitle($this->language->get('heading_title'));
 
         $data['breadcrumbs'] = [];
 
@@ -29,7 +35,7 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
         ];
 
         $data['breadcrumbs'][] = [
-            'text' => strip_tags($this->language->get('heading_title')),
+            'text' => $this->language->get('heading_title'),
             'href' => $this->url->link('extension/ps_google_sitemap/feed/ps_google_sitemap', 'user_token=' . $this->session->data['user_token'])
         ];
 
@@ -65,6 +71,12 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
     }
 
     /**
+     * Saves the settings for the Google Sitemap.
+     *
+     * This method validates user permissions, processes the submitted form data,
+     * and saves the settings to the database. It returns a JSON response indicating
+     * success or failure.
+     *
      * @return void
      */
     public function save(): void
@@ -90,6 +102,11 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
     }
 
     /**
+     * Installs the Google Sitemap extension.
+     *
+     * This method will contain logic to set up the necessary configurations or
+     * database tables needed for the extension upon installation. Currently, it is empty.
+     *
      * @return void
      */
     public function install(): void
@@ -98,6 +115,11 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
     }
 
     /**
+     * Uninstalls the Google Sitemap extension.
+     *
+     * This method will contain logic to remove configurations or database tables
+     * created by the extension upon uninstallation. Currently, it is empty.
+     *
      * @return void
      */
     public function uninstall(): void
