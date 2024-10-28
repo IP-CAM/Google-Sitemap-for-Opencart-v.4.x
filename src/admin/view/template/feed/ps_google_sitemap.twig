@@ -22,90 +22,104 @@
 
 				<form id="form-feed" action="{{ action }}" method="post" data-oc-toggle="ajax">
 
-					<div class="accordion" id="accordion-option">
+					<ul class="nav nav-tabs">
+						<li class="nav-item"><a href="#tab-general" data-bs-toggle="tab" class="nav-link active">{{ tab_general }}</a></li>
+						<li class="nav-item"><a href="#tab-support" data-bs-toggle="tab" class="nav-link">{{ tab_help_and_support }}</a></li>
+					</ul>
 
-						<div class="accordion-item">
-							<h2 class="accordion-header"><button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-category">{{ text_categories }}</button></h2>
+					<div class="tab-content">
+						<div id="tab-general" class="tab-pane active">
 
-							<div id="collapse-category" class="accordion-collapse collapse" data-bs-parent="#accordion-option">
-								<div class="accordion-body">
-
-									<div class="row mb-3">
-										<label class="col-sm-2 col-form-label">{{ entry_product }}</label>
-										<div class="col-sm-10">
-											<div class="form-check form-switch form-switch-lg">
-												<input type="hidden" name="feed_ps_google_sitemap_product" value="0" />
-												<input type="checkbox" name="feed_ps_google_sitemap_product" value="1" class="form-check-input" {% if feed_ps_google_sitemap_product %} checked{% endif %} />
-											</div>
-										</div>
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">{{ entry_product }}</label>
+								<div class="col-sm-10">
+									<div class="form-check form-switch form-switch-lg">
+										<input type="hidden" name="feed_ps_google_sitemap_product" value="0" />
+										<input type="checkbox" name="feed_ps_google_sitemap_product" value="1" class="form-check-input" {% if feed_ps_google_sitemap_product %} checked{% endif %} />
 									</div>
-
-									<div class="row mb-3">
-										<label class="col-sm-2 col-form-label">{{ entry_category }}</label>
-										<div class="col-sm-10">
-											<div class="form-check form-switch form-switch-lg">
-												<input type="hidden" name="feed_ps_google_sitemap_category" value="0" />
-												<input type="checkbox" name="feed_ps_google_sitemap_category" value="1" class="form-check-input" {% if feed_ps_google_sitemap_category %} checked{% endif %} />
-											</div>
-										</div>
-									</div>
-
-									<div class="row mb-3">
-										<label class="col-sm-2 col-form-label">{{ entry_manufacturer }}</label>
-										<div class="col-sm-10">
-											<div class="form-check form-switch form-switch-lg">
-												<input type="hidden" name="feed_ps_google_sitemap_manufacturer" value="0" />
-												<input type="checkbox" name="feed_ps_google_sitemap_manufacturer" value="1" class="form-check-input" {% if feed_ps_google_sitemap_manufacturer %} checked{% endif %} />
-											</div>
-										</div>
-									</div>
-
-									<div class="row mb-3">
-										<label class="col-sm-2 col-form-label">{{ entry_information }}</label>
-										<div class="col-sm-10">
-											<div class="form-check form-switch form-switch-lg">
-												<input type="hidden" name="feed_ps_google_sitemap_information" value="0" />
-												<input type="checkbox" name="feed_ps_google_sitemap_information" value="1" class="form-check-input" {% if feed_ps_google_sitemap_information %} checked{% endif %} />
-											</div>
-										</div>
-									</div>
-
 								</div>
 							</div>
-						</div>
 
-					</div>
-
-					<hr />
-
-					<div class="row mb-3">
-						<label class="col-sm-2 col-form-label">{{ entry_data_feed_url }}</label>
-						<div class="col-sm-10">
-							{% for language in languages %}
-							<div class="input-group">
-								<div class="input-group-text"><img src="{{ language.image }}" title="{{ language.name }}" /></div>
-								<input type="text" name="data_feed_{{ language.language_id }}" value="{{ data_feed_urls[language.language_id] }}" id="input-data-feed-{{ language.language_id }}" class="form-control" readonly />
-								<span class="input-group-btn">
-									<button type="button" class="btn btn-success btn-copy" data-toggle="tooltip" data-input-id="input-data-feed-{{ language.language_id }}" title="{{ help_copy }}"><i class="fa fa-copy"></i></button>
-								</span>
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">{{ entry_category }}</label>
+								<div class="col-sm-10">
+									<div class="form-check form-switch form-switch-lg">
+										<input type="hidden" name="feed_ps_google_sitemap_category" value="0" />
+										<input type="checkbox" name="feed_ps_google_sitemap_category" value="1" class="form-check-input" {% if feed_ps_google_sitemap_category %} checked{% endif %} />
+									</div>
+								</div>
 							</div>
-							{% endfor %}
-						</div>
-					</div>
 
-					<div class="row mb-3">
-						<label class="col-sm-2 col-form-label">{{ entry_status }}</label>
-						<div class="col-sm-10">
-							<select name="feed_ps_google_sitemap_status" id="input-status" class="form-control">
-								{% if feed_ps_google_sitemap_status %}
-								<option value="1" selected="selected">{{ text_enabled }}</option>
-								<option value="0">{{ text_disabled }}</option>
-								{% else %}
-								<option value="1">{{ text_enabled }}</option>
-								<option value="0" selected="selected">{{ text_disabled }}</option>
-								{% endif %}
-							</select>
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">{{ entry_manufacturer }}</label>
+								<div class="col-sm-10">
+									<div class="form-check form-switch form-switch-lg">
+										<input type="hidden" name="feed_ps_google_sitemap_manufacturer" value="0" />
+										<input type="checkbox" name="feed_ps_google_sitemap_manufacturer" value="1" class="form-check-input" {% if feed_ps_google_sitemap_manufacturer %} checked{% endif %} />
+									</div>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">{{ entry_information }}</label>
+								<div class="col-sm-10">
+									<div class="form-check form-switch form-switch-lg">
+										<input type="hidden" name="feed_ps_google_sitemap_information" value="0" />
+										<input type="checkbox" name="feed_ps_google_sitemap_information" value="1" class="form-check-input" {% if feed_ps_google_sitemap_information %} checked{% endif %} />
+									</div>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">{{ entry_data_feed_url }}</label>
+								<div class="col-sm-10">
+									{% for language in languages %}
+									<div class="input-group">
+										<div class="input-group-text"><img src="{{ language.image }}" title="{{ language.name }}" /></div>
+										<input type="text" name="data_feed_{{ language.language_id }}" value="{{ data_feed_urls[language.language_id] }}" id="input-data-feed-{{ language.language_id }}" class="form-control" readonly />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-success btn-copy" data-toggle="tooltip" data-input-id="input-data-feed-{{ language.language_id }}" title="{{ help_copy }}"><i class="fa fa-copy"></i></button>
+										</span>
+									</div>
+									{% endfor %}
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">{{ entry_status }}</label>
+								<div class="col-sm-10">
+									<select name="feed_ps_google_sitemap_status" id="input-status" class="form-control">
+										{% if feed_ps_google_sitemap_status %}
+										<option value="1" selected="selected">{{ text_enabled }}</option>
+										<option value="0">{{ text_disabled }}</option>
+										{% else %}
+										<option value="1">{{ text_enabled }}</option>
+										<option value="0" selected="selected">{{ text_disabled }}</option>
+										{% endif %}
+									</select>
+								</div>
+							</div>
+
 						</div>
+						<div id="tab-support" class="tab-pane">
+
+							<h3>{{ heading_getting_started }}</h3>
+							{{ text_getting_started }}
+							<hr />
+							<h3>{{ heading_setup }}</h3>
+							{{ text_setup }}
+							<hr />
+							<h3>{{ heading_troubleshot }}</h3>
+							{{ text_troubleshot }}
+							<hr />
+							<h3>{{ heading_faq }}</h3>
+							{{ text_faq }}
+							<hr />
+							<h3>{{ heading_contact }}</h3>
+							{{ text_contact }}
+
+						</div>
+
 					</div>
 
 				</form>

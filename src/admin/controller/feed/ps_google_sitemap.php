@@ -8,6 +8,16 @@ namespace Opencart\Admin\Controller\Extension\PSGoogleSitemap\Feed;
 class PSGoogleSitemap extends \Opencart\System\Engine\Controller
 {
     /**
+     * @var string The support email address.
+     */
+    const EXTENSION_EMAIL = 'support@playfulsparkle.com';
+
+    /**
+     * @var string The documentation URL for the extension.
+     */
+    const EXTENSION_DOC = 'https://github.com/playfulsparkle/oc4_google_sitemap.git';
+
+    /**
      * Displays the Google Sitemap settings page.
      *
      * This method loads the necessary language file, sets the title of the page,
@@ -62,6 +72,8 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
         foreach ($languages as $language) {
             $data['data_feed_urls'][$language['language_id']] = HTTP_CATALOG . 'index.php?route=extension/ps_google_sitemap/feed/ps_google_sitemap&language=' . $language['code'];
         }
+
+        $data['text_contact'] = sprintf($this->language->get('text_contact'), self::EXTENSION_EMAIL, self::EXTENSION_EMAIL, self::EXTENSION_DOC);
 
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
