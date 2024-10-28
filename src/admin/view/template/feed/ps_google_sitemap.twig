@@ -30,45 +30,50 @@
 					<div class="tab-content">
 						<div id="tab-general" class="tab-pane active">
 
-							<div class="row mb-3">
-								<label class="col-sm-2 col-form-label">{{ entry_product }}</label>
-								<div class="col-sm-10">
-									<div class="form-check form-switch form-switch-lg">
-										<input type="hidden" name="feed_ps_google_sitemap_product" value="0" />
-										<input type="checkbox" name="feed_ps_google_sitemap_product" value="1" class="form-check-input" {% if feed_ps_google_sitemap_product %} checked{% endif %} />
-									</div>
-								</div>
-							</div>
+							<fieldset class="border p-3 mb-3">
+								<legend>{{ heading_categories }}</legend>
 
-							<div class="row mb-3">
-								<label class="col-sm-2 col-form-label">{{ entry_category }}</label>
-								<div class="col-sm-10">
-									<div class="form-check form-switch form-switch-lg">
-										<input type="hidden" name="feed_ps_google_sitemap_category" value="0" />
-										<input type="checkbox" name="feed_ps_google_sitemap_category" value="1" class="form-check-input" {% if feed_ps_google_sitemap_category %} checked{% endif %} />
+								<div class="row mb-3">
+									<label class="col-sm-2 col-form-label">{{ entry_product }}</label>
+									<div class="col-sm-10">
+										<div class="form-check form-switch form-switch-lg">
+											<input type="hidden" name="feed_ps_google_sitemap_product" value="0" />
+											<input type="checkbox" name="feed_ps_google_sitemap_product" value="1" class="form-check-input" {% if feed_ps_google_sitemap_product %} checked{% endif %} />
+										</div>
 									</div>
 								</div>
-							</div>
 
-							<div class="row mb-3">
-								<label class="col-sm-2 col-form-label">{{ entry_manufacturer }}</label>
-								<div class="col-sm-10">
-									<div class="form-check form-switch form-switch-lg">
-										<input type="hidden" name="feed_ps_google_sitemap_manufacturer" value="0" />
-										<input type="checkbox" name="feed_ps_google_sitemap_manufacturer" value="1" class="form-check-input" {% if feed_ps_google_sitemap_manufacturer %} checked{% endif %} />
+								<div class="row mb-3">
+									<label class="col-sm-2 col-form-label">{{ entry_category }}</label>
+									<div class="col-sm-10">
+										<div class="form-check form-switch form-switch-lg">
+											<input type="hidden" name="feed_ps_google_sitemap_category" value="0" />
+											<input type="checkbox" name="feed_ps_google_sitemap_category" value="1" class="form-check-input" {% if feed_ps_google_sitemap_category %} checked{% endif %} />
+										</div>
 									</div>
 								</div>
-							</div>
 
-							<div class="row mb-3">
-								<label class="col-sm-2 col-form-label">{{ entry_information }}</label>
-								<div class="col-sm-10">
-									<div class="form-check form-switch form-switch-lg">
-										<input type="hidden" name="feed_ps_google_sitemap_information" value="0" />
-										<input type="checkbox" name="feed_ps_google_sitemap_information" value="1" class="form-check-input" {% if feed_ps_google_sitemap_information %} checked{% endif %} />
+								<div class="row mb-3">
+									<label class="col-sm-2 col-form-label">{{ entry_manufacturer }}</label>
+									<div class="col-sm-10">
+										<div class="form-check form-switch form-switch-lg">
+											<input type="hidden" name="feed_ps_google_sitemap_manufacturer" value="0" />
+											<input type="checkbox" name="feed_ps_google_sitemap_manufacturer" value="1" class="form-check-input" {% if feed_ps_google_sitemap_manufacturer %} checked{% endif %} />
+										</div>
 									</div>
 								</div>
-							</div>
+
+								<div class="row mb-3">
+									<label class="col-sm-2 col-form-label">{{ entry_information }}</label>
+									<div class="col-sm-10">
+										<div class="form-check form-switch form-switch-lg">
+											<input type="hidden" name="feed_ps_google_sitemap_information" value="0" />
+											<input type="checkbox" name="feed_ps_google_sitemap_information" value="1" class="form-check-input" {% if feed_ps_google_sitemap_information %} checked{% endif %} />
+										</div>
+									</div>
+								</div>
+
+							</fieldset>
 
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">{{ entry_data_feed_url }}</label>
