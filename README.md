@@ -1,4 +1,4 @@
-# Playful Sparkle - Google Sitemap
+# Playful Sparkle - Google Sitemap for OpenCart 4
 
 The **Playful Sparkle - Google Sitemap** extension for OpenCart 4 is a user-friendly tool designed to enhance your online store's visibility in search engines. This extension simplifies the creation of XML sitemaps, which are crucial for helping search engines crawl and index your website effectively.
 
