@@ -105,7 +105,7 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
 
             foreach ($manufacturers as $manufacturer) {
                 $this->xml->startElement('url');
-                $this->xml->writeElement('loc', $this->url->link('product/manufacturer', 'language=' . $language . '&manufacturer_id=' . $manufacturer['manufacturer_id']));
+                $this->xml->writeElement('loc', $this->url->link('product/manufacturer.info', 'language=' . $language . '&manufacturer_id=' . $manufacturer['manufacturer_id']));
                 $this->xml->endElement();
             }
         }
