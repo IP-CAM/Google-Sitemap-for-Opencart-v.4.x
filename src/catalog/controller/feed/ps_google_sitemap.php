@@ -42,14 +42,22 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
         $languages = $this->model_localisation_language->getLanguages();
 
         $language = $this->config->get('config_language');
-        $language_id = (int) $this->config->get('config_language_id');
 
         if (isset($this->request->get['language']) && isset($languages[$this->request->get['language']])) {
             $cur_language = $languages[$this->request->get['language']];
 
             $language = $cur_language['code'];
-            $language_id = $cur_language['language_id'];
         }
+
+
+        $this->load->model('setting/setting');
+
+        $config = $this->model_setting_setting->getSetting('feed_ps_google_sitemap', $this->config->get('config_store_id'));
+
+        $sitemap_product = isset($config['feed_ps_google_sitemap_product']) ? $config['feed_ps_google_sitemap_product'] : false;
+        $sitemap_category = isset($config['feed_ps_google_sitemap_category']) ? $config['feed_ps_google_sitemap_category'] : false;
+        $sitemap_manufacturer = isset($config['feed_ps_google_sitemap_manufacturer']) ? $config['feed_ps_google_sitemap_manufacturer'] : false;
+        $sitemap_information = isset($config['feed_ps_google_sitemap_information']) ? $config['feed_ps_google_sitemap_information'] : false;
 
 
         $this->xml = new \XMLWriter();
@@ -61,7 +69,7 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
         $this->xml->writeAttribute('xmlns:image', 'http://www.google.com/schemas/sitemap-image/1.1');
 
         #region Product
-        if ($this->config->get('feed_ps_google_sitemap_product')) {
+        if ($sitemap_product) {
             $this->load->model('catalog/product');
             $this->load->model('tool/image');
 
@@ -90,7 +98,7 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
 
 
         #region Category
-        if ($this->config->get('feed_ps_google_sitemap_category')) {
+        if ($sitemap_category) {
             $this->load->model('catalog/category');
 
             $this->getCategories($language, 0);
@@ -98,7 +106,7 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
         #endregion
 
         #region Manufacturer
-        if ($this->config->get('feed_ps_google_sitemap_manufacturer')) {
+        if ($sitemap_manufacturer) {
             $this->load->model('catalog/manufacturer');
 
             $manufacturers = $this->model_catalog_manufacturer->getManufacturers();
@@ -112,7 +120,7 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
         #endregion
 
         #region Information
-        if ($this->config->get('feed_ps_google_sitemap_information')) {
+        if ($sitemap_information) {
             $this->load->model('catalog/information');
 
             $informations = $this->model_catalog_information->getInformations();

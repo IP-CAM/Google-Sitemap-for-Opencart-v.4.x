@@ -30,6 +30,14 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
     {
         $this->load->language('extension/ps_google_sitemap/feed/ps_google_sitemap');
 
+
+        if (isset($this->request->get['store_id'])) {
+            $store_id = (int) $this->request->get['store_id'];
+        } else {
+            $store_id = 0;
+        }
+
+
         $this->document->setTitle($this->language->get('heading_title'));
 
         $data['breadcrumbs'] = [];
@@ -55,11 +63,15 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
 
         $data['user_token'] = $this->session->data['user_token'];
 
-        $data['feed_ps_google_sitemap_status'] = $this->config->get('feed_ps_google_sitemap_status');
-        $data['feed_ps_google_sitemap_product'] = $this->config->get('feed_ps_google_sitemap_product');
-        $data['feed_ps_google_sitemap_category'] = $this->config->get('feed_ps_google_sitemap_category');
-        $data['feed_ps_google_sitemap_manufacturer'] = $this->config->get('feed_ps_google_sitemap_manufacturer');
-        $data['feed_ps_google_sitemap_information'] = $this->config->get('feed_ps_google_sitemap_information');
+        $this->load->model('setting/setting');
+
+        $config = $this->model_setting_setting->getSetting('feed_ps_google_sitemap', $store_id);
+
+        $data['feed_ps_google_sitemap_status'] = isset($config['feed_ps_google_sitemap_status']) ? $config['feed_ps_google_sitemap_status'] : false;
+        $data['feed_ps_google_sitemap_product'] = isset($config['feed_ps_google_sitemap_product']) ? $config['feed_ps_google_sitemap_product'] : false;
+        $data['feed_ps_google_sitemap_category'] = isset($config['feed_ps_google_sitemap_category']) ? $config['feed_ps_google_sitemap_category'] : false;
+        $data['feed_ps_google_sitemap_manufacturer'] = isset($config['feed_ps_google_sitemap_manufacturer']) ? $config['feed_ps_google_sitemap_manufacturer'] : false;
+        $data['feed_ps_google_sitemap_information'] = isset($config['feed_ps_google_sitemap_information']) ? $config['feed_ps_google_sitemap_information'] : false;
 
         $this->load->model('localisation/language');
 
@@ -67,10 +79,38 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
 
         $data['languages'] = $languages;
 
+        $data['store_id'] = $store_id;
+
+        $data['stores'] = [];
+
+        $data['stores'][] = [
+            'store_id' => 0,
+            'name' => $this->config->get('config_name') . '&nbsp;' . $this->language->get('text_default'),
+            'href' => $this->url->link('extension/ps_google_sitemap/feed/ps_google_sitemap', 'user_token=' . $this->session->data['user_token'] . '&store_id=0'),
+        ];
+
+        $this->load->model('setting/store');
+
+        $stores = $this->model_setting_store->getStores();
+
+        $store_url = HTTP_CATALOG;
+
+        foreach ($stores as $store) {
+            $data['stores'][] = [
+                'store_id' => $store['store_id'],
+                'name' => $store['name'],
+                'href' => $this->url->link('extension/ps_google_sitemap/feed/ps_google_sitemap', 'user_token=' . $this->session->data['user_token'] . '&store_id=' . $store['store_id']),
+            ];
+
+            if ((int) $store['store_id'] === $store_id) {
+                $store_url = $store['url'];
+            }
+        }
+
         $data['data_feed_urls'] = [];
 
         foreach ($languages as $language) {
-            $data['data_feed_urls'][$language['language_id']] = HTTP_CATALOG . 'index.php?route=extension/ps_google_sitemap/feed/ps_google_sitemap&language=' . $language['code'];
+            $data['data_feed_urls'][$language['language_id']] = rtrim($store_url, '/') . '/index.php?route=extension/ps_google_sitemap/feed/ps_google_sitemap&language=' . $language['code'];
         }
 
         $data['text_contact'] = sprintf($this->language->get('text_contact'), self::EXTENSION_EMAIL, self::EXTENSION_EMAIL, self::EXTENSION_DOC);
@@ -101,10 +141,14 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
             $json['error'] = $this->language->get('error_permission');
         }
 
+        if (!$json && !isset($this->request->post['store_id'])) {
+            $json['error'] = $this->language->get('error_store_id');
+        }
+
         if (!$json) {
             $this->load->model('setting/setting');
 
-            $this->model_setting_setting->editSetting('feed_ps_google_sitemap', $this->request->post);
+            $this->model_setting_setting->editSetting('feed_ps_google_sitemap', $this->request->post, $this->request->post['store_id']);
 
             $json['success'] = $this->language->get('text_success');
         }
