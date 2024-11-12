@@ -67,11 +67,15 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
 
         $config = $this->model_setting_setting->getSetting('feed_ps_google_sitemap', $store_id);
 
-        $data['feed_ps_google_sitemap_status'] = isset($config['feed_ps_google_sitemap_status']) ? $config['feed_ps_google_sitemap_status'] : false;
-        $data['feed_ps_google_sitemap_product'] = isset($config['feed_ps_google_sitemap_product']) ? $config['feed_ps_google_sitemap_product'] : false;
-        $data['feed_ps_google_sitemap_category'] = isset($config['feed_ps_google_sitemap_category']) ? $config['feed_ps_google_sitemap_category'] : false;
-        $data['feed_ps_google_sitemap_manufacturer'] = isset($config['feed_ps_google_sitemap_manufacturer']) ? $config['feed_ps_google_sitemap_manufacturer'] : false;
-        $data['feed_ps_google_sitemap_information'] = isset($config['feed_ps_google_sitemap_information']) ? $config['feed_ps_google_sitemap_information'] : false;
+        $data['feed_ps_google_sitemap_status'] = isset($config['feed_ps_google_sitemap_status']) ? (bool) $config['feed_ps_google_sitemap_status'] : false;
+        $data['feed_ps_google_sitemap_product'] = isset($config['feed_ps_google_sitemap_product']) ? (bool) $config['feed_ps_google_sitemap_product'] : false;
+        $data['feed_ps_google_sitemap_product_images'] = isset($config['feed_ps_google_sitemap_product_images']) ? (bool) $config['feed_ps_google_sitemap_product_images'] : false;
+        $data['feed_ps_google_sitemap_max_product_images'] = isset($config['feed_ps_google_sitemap_max_product_images']) ? (int) $config['feed_ps_google_sitemap_max_product_images'] : 1;
+        $data['feed_ps_google_sitemap_category'] = isset($config['feed_ps_google_sitemap_category']) ? (bool) $config['feed_ps_google_sitemap_category'] : false;
+        $data['feed_ps_google_sitemap_category_images'] = isset($config['feed_ps_google_sitemap_category_images']) ? (bool) $config['feed_ps_google_sitemap_category_images'] : false;
+        $data['feed_ps_google_sitemap_manufacturer'] = isset($config['feed_ps_google_sitemap_manufacturer']) ? (bool) $config['feed_ps_google_sitemap_manufacturer'] : false;
+        $data['feed_ps_google_sitemap_manufacturer_images'] = isset($config['feed_ps_google_sitemap_manufacturer_images']) ? (bool) $config['feed_ps_google_sitemap_manufacturer_images'] : false;
+        $data['feed_ps_google_sitemap_information'] = isset($config['feed_ps_google_sitemap_information']) ? (bool) $config['feed_ps_google_sitemap_information'] : false;
 
         $this->load->model('localisation/language');
 
@@ -145,6 +149,10 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
             $json['error'] = $this->language->get('error_store_id');
         }
 
+        if (!$json && $this->request->post['feed_ps_google_sitemap_max_product_images'] < 0) {
+            $json['error']['input-max-product-images'] = $this->language->get('error_max_product_images_min');
+        }
+
         if (!$json) {
             $this->load->model('setting/setting');
 
@@ -167,7 +175,15 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
      */
     public function install(): void
     {
+        if ($this->user->hasPermission('modify', 'extension/ps_google_sitemap/feed/ps_google_sitemap')) {
+            $this->load->model('setting/setting');
 
+            $data = [
+                'feed_ps_google_sitemap_max_product_images' => 1
+            ];
+
+            $this->model_setting_setting->editSetting('feed_ps_google_sitemap', $data);
+        }
     }
 
     /**

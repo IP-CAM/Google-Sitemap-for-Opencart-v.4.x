@@ -39,44 +39,95 @@
 						<div id="tab-general" class="tab-pane active">
 
 							<fieldset class="border p-3 mb-3">
-								<legend>{{ heading_categories }}</legend>
+								<legend>{{ heading_product }}</legend>
 
 								<div class="row mb-3">
-									<label class="col-sm-2 col-form-label">{{ entry_product }}</label>
+									<label for="input-product" class="col-sm-2 col-form-label">{{ entry_product }}</label>
 									<div class="col-sm-10">
 										<div class="form-check form-switch form-switch-lg">
 											<input type="hidden" name="feed_ps_google_sitemap_product" value="0" />
-											<input type="checkbox" name="feed_ps_google_sitemap_product" value="1" class="form-check-input" {% if feed_ps_google_sitemap_product %} checked{% endif %} />
+											<input type="checkbox" name="feed_ps_google_sitemap_product" value="1" id="input-product" class="form-check-input" {% if feed_ps_google_sitemap_product %} checked{% endif %} />
 										</div>
 									</div>
 								</div>
 
 								<div class="row mb-3">
-									<label class="col-sm-2 col-form-label">{{ entry_category }}</label>
+									<label for="input-product-images" class="col-sm-2 col-form-label">{{ entry_product_images }}</label>
+									<div class="col-sm-10">
+										<div class="form-check form-switch form-switch-lg">
+											<input type="hidden" name="feed_ps_google_sitemap_product_images" value="0" />
+											<input type="checkbox" name="feed_ps_google_sitemap_product_images" value="1" id="input-product-images" class="form-check-input" {% if feed_ps_google_sitemap_product_images %} checked{% endif %} />
+										</div>
+									</div>
+								</div>
+
+								<div id="max-product-images-group" class="row mb-3 required"{% if not feed_ps_google_sitemap_product_images %} style="display: none;"{% endif %}>
+									<label for="input-max-product-images" class="col-sm-2 col-form-label">{{ entry_max_product_images }}</label>
+									<div class="col-sm-10">
+										<input type="text" name="feed_ps_google_sitemap_max_product_images" value="{{ feed_ps_google_sitemap_max_product_images }}" placeholder="{{ entry_fee }}" id="input-max-product-images" class="form-control"/>
+										<div id="error-input-max-product-images" class="invalid-feedback"></div>
+										<div class="form-text">{{ help_product_images }}</div>
+									</div>
+								</div>
+
+							</fieldset>
+							<fieldset class="border p-3 mb-3">
+								<legend>{{ heading_category }}</legend>
+
+								<div class="row mb-3">
+									<label for="input-category" class="col-sm-2 col-form-label">{{ entry_category }}</label>
 									<div class="col-sm-10">
 										<div class="form-check form-switch form-switch-lg">
 											<input type="hidden" name="feed_ps_google_sitemap_category" value="0" />
-											<input type="checkbox" name="feed_ps_google_sitemap_category" value="1" class="form-check-input" {% if feed_ps_google_sitemap_category %} checked{% endif %} />
+											<input type="checkbox" name="feed_ps_google_sitemap_category" value="1" id="input-category" class="form-check-input" {% if feed_ps_google_sitemap_category %} checked{% endif %} />
 										</div>
 									</div>
 								</div>
 
 								<div class="row mb-3">
-									<label class="col-sm-2 col-form-label">{{ entry_manufacturer }}</label>
+									<label for="input-category-images" class="col-sm-2 col-form-label">{{ entry_category_images }}</label>
+									<div class="col-sm-10">
+										<div class="form-check form-switch form-switch-lg">
+											<input type="hidden" name="feed_ps_google_sitemap_category_images" value="0" />
+											<input type="checkbox" name="feed_ps_google_sitemap_category_images" value="1" id="input-category-images" class="form-check-input" {% if feed_ps_google_sitemap_category_images %} checked{% endif %} />
+										</div>
+									</div>
+								</div>
+
+							</fieldset>
+							<fieldset class="border p-3 mb-3">
+								<legend>{{ heading_manufacturer }}</legend>
+
+								<div class="row mb-3">
+									<label for="input-manufacturer" class="col-sm-2 col-form-label">{{ entry_manufacturer }}</label>
 									<div class="col-sm-10">
 										<div class="form-check form-switch form-switch-lg">
 											<input type="hidden" name="feed_ps_google_sitemap_manufacturer" value="0" />
-											<input type="checkbox" name="feed_ps_google_sitemap_manufacturer" value="1" class="form-check-input" {% if feed_ps_google_sitemap_manufacturer %} checked{% endif %} />
+											<input type="checkbox" name="feed_ps_google_sitemap_manufacturer" value="1" id="input-manufacturer" class="form-check-input" {% if feed_ps_google_sitemap_manufacturer %} checked{% endif %} />
 										</div>
 									</div>
 								</div>
 
 								<div class="row mb-3">
-									<label class="col-sm-2 col-form-label">{{ entry_information }}</label>
+									<label for="input-manufacturer-images" class="col-sm-2 col-form-label">{{ entry_manufacturer_images }}</label>
+									<div class="col-sm-10">
+										<div class="form-check form-switch form-switch-lg">
+											<input type="hidden" name="feed_ps_google_sitemap_manufacturer_images" value="0" />
+											<input type="checkbox" name="feed_ps_google_sitemap_manufacturer_images" value="1" id="input-manufacturer-images" class="form-check-input" {% if feed_ps_google_sitemap_manufacturer_images %} checked{% endif %} />
+										</div>
+									</div>
+								</div>
+
+							</fieldset>
+							<fieldset class="border p-3 mb-3">
+								<legend>{{ heading_information }}</legend>
+
+								<div class="row mb-3">
+									<label for="input-information" class="col-sm-2 col-form-label">{{ entry_information }}</label>
 									<div class="col-sm-10">
 										<div class="form-check form-switch form-switch-lg">
 											<input type="hidden" name="feed_ps_google_sitemap_information" value="0" />
-											<input type="checkbox" name="feed_ps_google_sitemap_information" value="1" class="form-check-input" {% if feed_ps_google_sitemap_information %} checked{% endif %} />
+											<input type="checkbox" name="feed_ps_google_sitemap_information" value="1" id="input-information" class="form-check-input" {% if feed_ps_google_sitemap_information %} checked{% endif %} />
 										</div>
 									</div>
 								</div>
@@ -99,17 +150,12 @@
 							</div>
 
 							<div class="row mb-3">
-								<label class="col-sm-2 col-form-label">{{ entry_status }}</label>
+								<label for="input-status" class="col-sm-2 col-form-label">{{ entry_status }}</label>
 								<div class="col-sm-10">
-									<select name="feed_ps_google_sitemap_status" id="input-status" class="form-control">
-										{% if feed_ps_google_sitemap_status %}
-										<option value="1" selected="selected">{{ text_enabled }}</option>
-										<option value="0">{{ text_disabled }}</option>
-										{% else %}
-										<option value="1">{{ text_enabled }}</option>
-										<option value="0" selected="selected">{{ text_disabled }}</option>
-										{% endif %}
-									</select>
+									<div class="form-check form-switch form-switch-lg">
+										<input type="hidden" name="feed_ps_google_sitemap_status" value="0" />
+										<input type="checkbox" name="feed_ps_google_sitemap_status" value="1" id="input-status" class="form-check-input" {% if feed_ps_google_sitemap_status %} checked{% endif %} />
+									</div>
 								</div>
 							</div>
 
@@ -146,20 +192,22 @@
 			window.location = $(this).val();
 		});
 
-		window.addEventListener("load", (event) => {
-			var btns = document.querySelectorAll('.btn-copy');
+		$('#input-product-images').on('change', function () {
+			if ($(this).prop('checked')) {
+					$('#max-product-images-group').fadeIn();
+			} else {
+					$('#max-product-images-group').fadeOut();
+			}
+		});
 
-			btns.forEach(btn => {
-				btn.addEventListener("click", function () {
-					var copyText = document.querySelector("#" + this.dataset.inputId);
+    $('.btn-copy').on('click', function () {
+			var copyText = $("#" + $(this).data('inputId'));
 
-					if (copyText) {
-						copyText.select();
-						copyText.setSelectionRange(0, 99999);
-						document.execCommand("copy");
-					}
-				});
-			});
+			if (copyText.length) {
+					copyText.select();
+					copyText[0].setSelectionRange(0, 99999);
+					document.execCommand("copy");
+			}
 		});
 	</script>
 </div>
