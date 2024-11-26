@@ -55,6 +55,7 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
         $sitemap_manufacturer_images = isset($config['feed_ps_google_sitemap_manufacturer_images']) ? (bool) $config['feed_ps_google_sitemap_manufacturer_images'] : false;
         $sitemap_information = isset($config['feed_ps_google_sitemap_information']) ? (bool) $config['feed_ps_google_sitemap_information'] : false;
 
+        $separator = version_compare(VERSION, '4.0.2.0', '>=') ? '.' : '|';
 
         $xml = new \XMLWriter();
         $xml->openMemory();
@@ -124,7 +125,7 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
 
             foreach ($manufacturers as $manufacturer) {
                 $xml->startElement('url');
-                $manufacturer_url = $this->url->link('product/manufacturer.info', 'language=' . $language . '&manufacturer_id=' . $manufacturer['manufacturer_id']);
+                $manufacturer_url = $this->url->link('product/manufacturer' . $separator . 'info', 'language=' . $language . '&manufacturer_id=' . $manufacturer['manufacturer_id']);
                 $xml->writeElement('loc', str_replace('&amp;', '&', $manufacturer_url));
 
                 if ($sitemap_manufacturer_images && !empty($manufacturer['image'])) {
