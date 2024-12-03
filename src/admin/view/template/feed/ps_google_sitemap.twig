@@ -11,6 +11,7 @@
 						<option value="{{ store.href }}" {% if store.store_id == store_id %} selected{% endif %}>{{ store.name }}</option>
 						{% endfor %}
 					</select>&nbsp;
+					<button type="button" id="ps-patch-htaccess" data-bs-toggle="tooltip" title="{{ button_patch_htaccess }}" class="btn btn-warning"><i class="fa-solid fa-save"></i> {{ button_patch_htaccess }}</button>&nbsp;
 					<button type="submit" form="form-feed" data-bs-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa-solid fa-save"></i></button>&nbsp;
 					<a href="{{ back }}" data-bs-toggle="tooltip" title="{{ button_back }}" class="btn btn-light"><i class="fa-solid fa-reply"></i></a>
 				</div>
@@ -24,6 +25,9 @@
 		</div>
 	</div>
 	<div class="container-fluid">
+    {% for robots_txt_error in robots_txt_errors %}
+    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ robots_txt_error }}</div>
+    {% endfor %}
 		<div class="card">
 			<div class="card-header"><i class="fa-solid fa-list"></i> {{ text_edit }}</div>
 			<div class="card-body">
@@ -208,6 +212,36 @@
 					copyText[0].setSelectionRange(0, 99999);
 					document.execCommand("copy");
 			}
+		});
+
+		$('#ps-patch-htaccess').on('click', function() {
+			var $this = $(this);
+			var action = $(this).data('fix-action');
+
+			$.ajax({
+			  url: 'index.php?route=extension/ps_google_sitemap/feed/ps_google_sitemap.patchhtaccess&user_token={{ user_token }}',
+			  dataType: 'json',
+				beforeSend: function () {
+					$($this).button('loading');
+				},
+				complete: function () {
+					$($this).button('reset');
+				},
+				success: function (json) {
+					$('.alert-dismissible').remove();
+
+					if (json['error']) {
+						$('#alert').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+					}
+
+					if (json['success']) {
+						$('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-circle-check"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+					}
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+					console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+				}
+			});
 		});
 	</script>
 </div>
