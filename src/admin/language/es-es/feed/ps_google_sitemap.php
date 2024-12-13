@@ -45,7 +45,6 @@ $_['entry_information']            = 'Información';
 $_['entry_data_feed_url']          = 'URL del feed de datos';
 $_['entry_active_store']           = 'Tienda activa';
 $_['entry_htaccess_mod']           = 'Modificación de .htaccess';
-$_['']     = 'Validar el archivo robots.txt';
 $_['entry_validation_results']     = 'Resultados de la validación';
 $_['entry_user_agent']             = 'Agente de usuario';
 
@@ -54,6 +53,8 @@ $_['button_patch_htaccess']        = 'Aplicar modificación a .htaccess';
 $_['button_validate_robotstxt']    = 'Validar las reglas de Robots.txt';
 
 // Help
+$_['help_copy']                    = 'Copiar URL';
+$_['help_open']                    = 'Abrir URL';
 $_['help_product_images']          = 'La exportación de imágenes de productos puede aumentar el tiempo de procesamiento inicialmente (solo cuando las imágenes se procesan por primera vez), y el tamaño del archivo XML sitemap será mayor como resultado.';
 $_['help_htaccess_mod']            = 'La URL SEO-amigable del feed de datos requiere una modificación de su archivo .htaccess. Puede agregar el código necesario manualmente copiándolo y pegándolo en su archivo .htaccess, o simplemente hacer clic en el botón naranja "Patch .htaccess" para aplicar los cambios automáticamente.';
 
