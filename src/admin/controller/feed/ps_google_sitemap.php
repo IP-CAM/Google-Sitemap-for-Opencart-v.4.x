@@ -205,7 +205,7 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
      */
     public function install(): void
     {
-        if ($this->user->hasPermission('modify', 'extension/ps_google_sitemap/feed/ps_google_sitemap')) {
+        if ($this->user->hasPermission('modify', 'extension/feed')) {
             $this->load->model('setting/setting');
 
             $data = [
