@@ -299,7 +299,7 @@
 			var action = $(this).data('fix-action');
 
 			$.ajax({
-			  url: 'index.php?route=extension/ps_google_sitemap/feed/ps_google_sitemap.validaterobotstxt&user_token={{ user_token }}&store_id={{ store_id}}&user_agent=' + $('#input-user-agent option:selected').val(),
+			  url: 'index.php?route=extension/ps_google_sitemap/feed/ps_google_sitemap{{ oc4_separator }}validaterobotstxt&user_token={{ user_token }}&store_id={{ store_id}}&user_agent=' + $('#input-user-agent option:selected').val(),
 			  dataType: 'json',
 				beforeSend: function () {
 					$($this).button('loading');
@@ -326,10 +326,9 @@
 
 		$('#ps-patch-htaccess').on('click', function() {
 			var $this = $(this);
-			var action = $(this).data('fix-action');
 
 			$.ajax({
-			  url: 'index.php?route=extension/ps_google_sitemap/feed/ps_google_sitemap.patchhtaccess&user_token={{ user_token }}',
+			  url: 'index.php?route=extension/ps_google_sitemap/feed/ps_google_sitemap{{ oc4_separator }}patchhtaccess&user_token={{ user_token }}',
 			  dataType: 'json',
 				beforeSend: function () {
 					$($this).button('loading');

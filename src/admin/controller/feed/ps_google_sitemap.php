@@ -60,10 +60,11 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
         $separator = version_compare(VERSION, '4.0.2.0', '>=') ? '.' : '|';
 
         $data['action'] = $this->url->link('extension/ps_google_sitemap/feed/ps_google_sitemap' . $separator . 'save', 'user_token=' . $this->session->data['user_token']);
-
         $data['back'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=feed');
 
         $data['user_token'] = $this->session->data['user_token'];
+
+        $data['oc4_separator'] = $separator;
 
         $this->load->model('setting/setting');
 
