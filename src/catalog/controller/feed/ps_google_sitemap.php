@@ -191,7 +191,7 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
      *
      * @return void
      */
-    protected function getCategories(\XMLWriter &$xml, bool $sitemap_category_images, string $language, int $parent_id): void
+    protected function getCategories(\XMLWriter &$xml, bool $sitemap_category_images, string $language, int $parent_id, array $parent_path = []): void
     {
         $categories = $this->model_catalog_category->getCategories($parent_id);
 
@@ -201,12 +201,16 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
             }
 
             $xml->startElement('url');
-            $category_url = $this->url->link('product/category', 'language=' . $language . '&path=' . $category['category_id']);
+
+            $category_path = array_merge($parent_path, [$category['category_id']]);
+
+            $category_url = $this->url->link('product/category', 'language=' . $language . '&path=' . implode('_', $category_path));
+
             $xml->writeElement('loc', str_replace('&amp;', '&', $category_url));
             $xml->writeElement('lastmod', date('Y-m-d\TH:i:sP', strtotime($category['date_modified'])));
 
             if ($sitemap_category_images) {
-                $resized_image = !empty($category['image']) ? $this->model_tool_image->resize($category['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height')) : nul;
+                $resized_image = !empty($category['image']) ? $this->model_tool_image->resize($category['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height')) : null;
 
                 if ($resized_image) {
                     $xml->startElement('image:image');
@@ -217,7 +221,7 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
 
             $xml->endElement();
 
-            $this->getCategories($xml, $sitemap_category_images, $language, $category['category_id']);
+            $this->getCategories($xml, $sitemap_category_images, $language, $category['category_id'], $category_path);
         }
     }
 }
