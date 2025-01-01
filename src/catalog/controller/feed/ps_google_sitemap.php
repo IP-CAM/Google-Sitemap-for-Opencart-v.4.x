@@ -86,7 +86,7 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
                 $xml->writeElement('lastmod', date('Y-m-d\TH:i:sP', strtotime($product['date_modified'])));
 
                 if ($sitemap_product_images && $sitemap_max_product_images > 0) {
-                    $resized_image = $product['image'] ? $this->model_tool_image->resize(html_entity_decode($product['image'], ENT_QUOTES, 'UTF-8'), $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height')) : null;
+                    $resized_image = !empty($product['image']) ? $this->model_tool_image->resize($product['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height')) : null;
 
                     if ($resized_image) {
                         $xml->startElement('image:image');
@@ -99,7 +99,7 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
                         $product_images = array_slice($product_images, 0, $sitemap_max_product_images - 1);
 
                         foreach ($product_images as $product_image) {
-                            $resized_image = $product_image['image'] ? $this->model_tool_image->resize(html_entity_decode($product_image['image'], ENT_QUOTES, 'UTF-8'), $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height')) : null;
+                            $resized_image = !empty($product_image['image']) ? $this->model_tool_image->resize($product_image['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height')) : null;
 
                             if ($resized_image) {
                                 $xml->startElement('image:image');
@@ -136,7 +136,7 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
                 $xml->writeElement('loc', str_replace('&amp;', '&', $manufacturer_url));
 
                 if ($sitemap_manufacturer_images) {
-                    $resized_image = $manufacturer['image'] ? $this->model_tool_image->resize(html_entity_decode($manufacturer['image'], ENT_QUOTES, 'UTF-8'), $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height')) : null;
+                    $resized_image = !empty($manufacturer['image']) ? $this->model_tool_image->resize($manufacturer['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height')) : null;
 
                     if ($resized_image) {
                         $xml->startElement('image:image');
@@ -206,7 +206,7 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
             $xml->writeElement('lastmod', date('Y-m-d\TH:i:sP', strtotime($category['date_modified'])));
 
             if ($sitemap_category_images) {
-                $resized_image = $category['image'] ? $this->model_tool_image->resize(html_entity_decode($category['image'], ENT_QUOTES, 'UTF-8'), $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height')) : nul;
+                $resized_image = !empty($category['image']) ? $this->model_tool_image->resize($category['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height')) : nul;
 
                 if ($resized_image) {
                     $xml->startElement('image:image');
