@@ -30,6 +30,7 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
 
         $this->load->model('tool/image');
         $this->load->model('localisation/language');
+        $this->load->model('extension/ps_google_sitemap/feed/ps_google_sitemap');
 
         $languages = $this->model_localisation_language->getLanguages();
 
@@ -70,16 +71,10 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
 
         #region Product
         if ($sitemap_product) {
-            $this->load->model('catalog/product');
-
             // Fetch products in chunks to handle large datasets
-            $products = $this->model_catalog_product->getProducts();
+            $products = $this->model_extension_ps_google_sitemap_feed_ps_google_sitemap->getProducts();
 
             foreach ($products as $product) {
-                if (0 === (int) $product['status']) {
-                    continue;
-                }
-
                 $xml->startElement('url');
                 $product_url = $this->url->link('product/product', 'language=' . $language . '&product_id=' . $product['product_id']);
                 $xml->writeElement('loc', str_replace('&amp;', '&', $product_url));
@@ -95,7 +90,7 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
                     }
 
                     if ($sitemap_max_product_images > 1) {
-                        $product_images = $this->model_catalog_product->getImages($product['product_id']);
+                        $product_images = $this->model_extension_ps_google_sitemap_feed_ps_google_sitemap->getImages($product['product_id']);
                         $product_images = array_slice($product_images, 0, $sitemap_max_product_images - 1);
 
                         foreach ($product_images as $product_image) {
@@ -118,17 +113,13 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
 
         #region Category
         if ($sitemap_category) {
-            $this->load->model('catalog/category');
-
             $this->getCategories($xml, $sitemap_category_images, $language, 0);
         }
         #endregion
 
         #region Manufacturer
         if ($sitemap_manufacturer) {
-            $this->load->model('catalog/manufacturer');
-
-            $manufacturers = $this->model_catalog_manufacturer->getManufacturers();
+            $manufacturers = $this->model_extension_ps_google_sitemap_feed_ps_google_sitemap->getManufacturers();
 
             foreach ($manufacturers as $manufacturer) {
                 $xml->startElement('url');
@@ -152,15 +143,9 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
 
         #region Information
         if ($sitemap_information) {
-            $this->load->model('catalog/information');
-
-            $informations = $this->model_catalog_information->getInformations();
+            $informations = $this->model_extension_ps_google_sitemap_feed_ps_google_sitemap->getInformations();
 
             foreach ($informations as $information) {
-                if (0 === (int) $information['status']) {
-                    continue;
-                }
-
                 $xml->startElement('url');
                 $information_url = $this->url->link('information/information', 'language=' . $language . '&information_id=' . $information['information_id']);
                 $xml->writeElement('loc', str_replace('&amp;', '&', $information_url));
@@ -193,13 +178,9 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
      */
     protected function getCategories(\XMLWriter &$xml, bool $sitemap_category_images, string $language, int $parent_id, array $parent_path = []): void
     {
-        $categories = $this->model_catalog_category->getCategories($parent_id);
+        $categories = $this->model_extension_ps_google_sitemap_feed_ps_google_sitemap->getCategories($parent_id);
 
         foreach ($categories as $category) {
-            if (0 === (int) $category['status']) {
-                continue;
-            }
-
             $xml->startElement('url');
 
             $category_path = array_merge($parent_path, [$category['category_id']]);
