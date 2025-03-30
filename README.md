@@ -1,6 +1,6 @@
 # Playful Sparkle - Google Sitemap for OpenCart 4
 
-The **Playful Sparkle - Google Sitemap** extension for OpenCart 4.x+ offers a refined XML sitemap generation solution that aligns with search engine standards and SEO best practices. This extension supports detailed customization, allowing OpenCart merchants to tailor sitemaps to include specific product pages (with images), category pages (with images), and manufacturer pages, all tagged to support complete, accurate indexing by search engines.
+The **Playful Sparkle - Google Sitemap** extension for OpenCart 4.x+ offers a refined XML sitemap generation solution that aligns with search engine standards and SEO best practices. This extension supports detailed customization, allowing OpenCart merchants to tailor sitemaps to include specific product pages (with images), category pages (with images), manufacturer pages and information pages (and CMS topics, article pages), all tagged to support complete, accurate indexing by search engines.
 
 A key feature of the extension is its use of PHP’s `XMLWriter` class to generate standards-compliant XML sitemaps per the [Sitemaps.org protocol](https://sitemaps.org/protocol.html). This ensures that search engines can efficiently crawl site content, aided by the `<lastmod>` attribute included on product and category pages. The `<lastmod>` attribute, which tracks the date of the most recent content update, allows search engines to prioritize updated pages, increasing the likelihood of timely indexing.
 
@@ -14,7 +14,7 @@ With multi-store and multi-language support, the extension allows merchants to c
 
 ## Features
 
-- **Customizable Sitemap**: Customize the sitemap to include product pages (with images), category pages (with images), and manufacturer pages, ensuring thorough indexing.
+- **Customizable Sitemap**: Customize the sitemap to include product pages (with images), category pages (with images), manufacturer pages and information pages (and CMS topis, article pages), ensuring thorough indexing.
 - **Standards-Compliant XML Sitemap**: Generates a fully compliant XML sitemap using PHP’s XMLWriter class, following the [Sitemaps.org protocol](https://sitemaps.org/protocol.html).
 - **Last Modified Tracking**: Includes the `<lastmod>` attribute for product and category pages, helping search engines track updates for timely indexing.
 - **Compatible with Webmaster Tools**: Fully compatible with commonly used webmaster tools such as Google Search Console, Bing Webmaster Tools, and Yandex Webmaster Tools.

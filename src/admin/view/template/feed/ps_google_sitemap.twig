@@ -144,7 +144,32 @@
 								</div>
 
 							</fieldset>
+							{% if is_oc_4_1 %}
+							<fieldset class="border p-3 mb-3">
+								<legend>{{ heading_cms }}</legend>
 
+								<div class="row mb-3">
+									<label for="input-topic" class="col-sm-2 col-form-label">{{ entry_topic }}</label>
+									<div class="col-sm-10">
+										<div class="form-check form-switch form-switch-lg">
+											<input type="hidden" name="feed_ps_google_sitemap_topic" value="0">
+											<input type="checkbox" name="feed_ps_google_sitemap_topic" value="1" id="input-topic" class="form-check-input" {% if feed_ps_google_sitemap_topic %} checked{% endif %}>
+										</div>
+									</div>
+								</div>
+
+								<div class="row mb-3">
+									<label for="input-article" class="col-sm-2 col-form-label">{{ entry_article }}</label>
+									<div class="col-sm-10">
+										<div class="form-check form-switch form-switch-lg">
+											<input type="hidden" name="feed_ps_google_sitemap_article" value="0">
+											<input type="checkbox" name="feed_ps_google_sitemap_article" value="1" id="input-article" class="form-check-input" {% if feed_ps_google_sitemap_article %} checked{% endif %}>
+										</div>
+									</div>
+								</div>
+
+							</fieldset>
+							{% endif %}
 							<fieldset class="border p-3 mb-3">
 								<legend>{{ heading_robotstxt }}</legend>
 

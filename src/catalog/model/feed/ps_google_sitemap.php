@@ -98,4 +98,46 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Model
 
         return $category_data;
     }
+
+    public function getTopics(): array
+    {
+        $sql = "SELECT * FROM `" . DB_PREFIX . "topic` `t`
+        LEFT JOIN `" . DB_PREFIX . "topic_to_store` `t2s` ON (`t`.`topic_id` = `t2s`.`topic_id`)
+        WHERE `t2s`.`store_id` = '" . (int) $this->config->get('config_store_id') . "' AND `t`.`status` = '1' ORDER BY `t`.`sort_order` DESC";
+
+        $key = md5($sql);
+
+        $topic_data = $this->cache->get('topic.' . $key);
+
+        if (!$topic_data) {
+            $query = $this->db->query($sql);
+
+            $topic_data = $query->rows;
+
+            $this->cache->set('topic.' . $key, $topic_data);
+        }
+
+        return $topic_data;
+    }
+
+    public function getArticles(): array
+    {
+        $sql = "SELECT * FROM `" . DB_PREFIX . "article` `a`
+        LEFT JOIN `" . DB_PREFIX . "article_to_store` `a2s` ON (`a`.`article_id` = `a2s`.`article_id`)
+        WHERE `a2s`.`store_id` = '" . (int) $this->config->get('config_store_id') . "' AND `a`.`status` = '1'";
+
+        $key = md5($sql);
+
+        $article_data = $this->cache->get('article.' . $key);
+
+        if (!$article_data) {
+            $query = $this->db->query($sql);
+
+            $article_data = $query->rows;
+
+            $this->cache->set('article.' . $key, $article_data);
+        }
+
+        return $article_data;
+    }
 }

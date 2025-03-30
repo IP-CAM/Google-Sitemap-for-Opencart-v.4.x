@@ -79,6 +79,10 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
         $data['feed_ps_google_sitemap_manufacturer'] = isset($config['feed_ps_google_sitemap_manufacturer']) ? (bool) $config['feed_ps_google_sitemap_manufacturer'] : false;
         $data['feed_ps_google_sitemap_manufacturer_images'] = isset($config['feed_ps_google_sitemap_manufacturer_images']) ? (bool) $config['feed_ps_google_sitemap_manufacturer_images'] : false;
         $data['feed_ps_google_sitemap_information'] = isset($config['feed_ps_google_sitemap_information']) ? (bool) $config['feed_ps_google_sitemap_information'] : false;
+        $data['feed_ps_google_sitemap_topic'] = isset($config['feed_ps_google_sitemap_topic']) ? (bool) $config['feed_ps_google_sitemap_topic'] : false;
+        $data['feed_ps_google_sitemap_article'] = isset($config['feed_ps_google_sitemap_article']) ? (bool) $config['feed_ps_google_sitemap_article'] : false;
+
+        $data['is_oc_4_1'] = version_compare(VERSION, '4.1.0.0', '>=');
 
         $this->load->model('localisation/language');
 
