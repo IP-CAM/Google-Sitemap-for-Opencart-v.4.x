@@ -160,24 +160,28 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
 
         if ($is_oc_4_1) {
             #region Topic
-            $topics = $this->model_extension_ps_google_sitemap_feed_ps_google_sitemap->getTopics();
+            if ($sitemap_topic) {
+                $topics = $this->model_extension_ps_google_sitemap_feed_ps_google_sitemap->getTopics();
 
-            foreach ($topics as $topic) {
-                $xml->startElement('url');
-                $topic_url = $this->url->link('cms/blog', 'language=' . $language . '&topic_id=' . $topic['topic_id']);
-                $xml->writeElement('loc', str_replace('&amp;', '&', $topic_url));
-                $xml->endElement();
+                foreach ($topics as $topic) {
+                    $xml->startElement('url');
+                    $topic_url = $this->url->link('cms/blog', 'language=' . $language . '&topic_id=' . $topic['topic_id']);
+                    $xml->writeElement('loc', str_replace('&amp;', '&', $topic_url));
+                    $xml->endElement();
+                }
             }
             #endregion
 
             #region Articla
-            $articles = $this->model_extension_ps_google_sitemap_feed_ps_google_sitemap->getArticles();
+            if ($sitemap_article) {
+                $articles = $this->model_extension_ps_google_sitemap_feed_ps_google_sitemap->getArticles();
 
-            foreach ($articles as $article) {
-                $xml->startElement('url');
-                $article_url = $this->url->link('cms/blog', 'language=' . $language . '&topic_id=' . $topic['topic_id'] . '&article_id=' . $article['article_id']);
-                $xml->writeElement('loc', str_replace('&amp;', '&', $article_url));
-                $xml->endElement();
+                foreach ($articles as $article) {
+                    $xml->startElement('url');
+                    $article_url = $this->url->link('cms/blog', 'language=' . $language . '&topic_id=' . $topic['topic_id'] . '&article_id=' . $article['article_id']);
+                    $xml->writeElement('loc', str_replace('&amp;', '&', $article_url));
+                    $xml->endElement();
+                }
             }
             #endregion
         }
