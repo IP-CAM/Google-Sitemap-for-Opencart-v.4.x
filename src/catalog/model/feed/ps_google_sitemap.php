@@ -80,7 +80,13 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Model
 
     public function getCategories(int $parent_id = 0): array
     {
-        $sql = "SELECT `c`.`category_id`, `c`.`date_modified`, `c`.`image` FROM `" . DB_PREFIX . "category` `c`
+        $sql = "SELECT `c`.`category_id`";
+
+        if (version_compare(VERSION, '4.1.0.0', '<=')) {
+            $sql .= ", `c`.`date_modified`";
+        }
+
+        $sql .= ", `c`.`image` FROM `" . DB_PREFIX . "category` `c`
         LEFT JOIN `" . DB_PREFIX . "category_to_store` `c2s` ON (`c`.`category_id` = `c2s`.`category_id`)
         WHERE `c`.`parent_id` = '" . (int) $parent_id . "' AND `c`.`status` = '1' AND `c2s`.`store_id` = '" . (int) $this->config->get('config_store_id') . "'";
 

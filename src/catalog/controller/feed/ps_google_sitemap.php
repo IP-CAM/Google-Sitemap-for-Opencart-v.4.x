@@ -216,7 +216,10 @@ class PSGoogleSitemap extends \Opencart\System\Engine\Controller
             $category_url = $this->url->link('product/category', 'language=' . $language . '&path=' . implode('_', $category_path));
 
             $xml->writeElement('loc', str_replace('&amp;', '&', $category_url));
-            $xml->writeElement('lastmod', date('Y-m-d\TH:i:sP', strtotime($category['date_modified'])));
+
+            if (version_compare(VERSION, '4.1.0.0', '<=')) {
+                $xml->writeElement('lastmod', date('Y-m-d\TH:i:sP', strtotime($category['date_modified'])));
+            }
 
             if ($sitemap_category_images) {
                 $resized_image = !empty($category['image']) ? $this->model_tool_image->resize($category['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height')) : null;
